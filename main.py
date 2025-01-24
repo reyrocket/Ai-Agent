@@ -34,26 +34,31 @@ available_actions = {
 
 # user_prompt = f"What is the response time of {website}.com?"
 
-user_query = input("Enter a command: ")
+def ask():
+  while True:
+    user_query = input("Enter a command: ")
+    
+    messages = [
+      {"role" : "system", "content": system_prompt},
+      {"role" : "user", "content" : user_query},
+    ]
+    
+    
+    turn_count = 1
+    max_turns = 5
+    
+    while turn_count < max_turns:
+      print(f"Loop: {turn_count}")
+      print("---------------------")
+      turn_count += 1
+      
+      agent_response = llm_instance.generate_response(messages=messages)
+      
+      messages.append({"role": "assistant", "content": agent_response})
+      
+      print(agent_response)
 
-messages = [
-  {"role" : "system", "content": system_prompt},
-  {"role" : "user", "content" : user_query},
-]
-
-turn_count = 1
-max_turns = 5
-
-while turn_count < max_turns:
-  print(f"Loop: {turn_count}")
-  print("---------------------")
-  turn_count += 1
-  
-  agent_response = llm_instance.generate_response(messages=messages)
-  
-  messages.append({"role": "assistant", "content": agent_response})
-
-  print(agent_response)
+ask()
   
   # json_function = extract_json_from_text(response)
   
