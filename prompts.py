@@ -10,7 +10,7 @@ Action_Response will be the result of running those actions.
 Your available actions are:
 
 get_response_time:
-e.g. get_response_time: google.com
+e.g. get_response_time: youtube.com
 Returns the response time of a website.
 
 Example session:

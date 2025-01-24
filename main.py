@@ -20,7 +20,9 @@ available_actions = {
   "get_response_time": get_response_time
 }
 
-user_prompt = "What is the response time of google.com?"
+website = input("Enter a website: ")
+
+user_prompt = f"What is the response time of {website}.com?"
 
 messages = [
   {"role" : "system", "content": system_prompt},
@@ -36,7 +38,7 @@ while turn_count < max_turns:
   turn_count += 1
   
   response = generate_text_with_conversation(messages)
-
+  
   print(response)
 
   json_function = extract_json(response)
@@ -45,7 +47,9 @@ while turn_count < max_turns:
     function_name = json_function[0]['function_name']
     function_params = json_function[0]['function_params']
     if function_name not in available_actions:
-      raise Exception(f"Unknown action: {function_name}: {function_params}")
+      # raise Exception(f"Unknown action: {function_name}: {function_params}")
+      print("Information unavailable.")
+      break
     print(f" -- running {function_name} {function_params}")
     action_function = available_actions[function_name]
     
